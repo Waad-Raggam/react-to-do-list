@@ -1,4 +1,5 @@
 import React from 'react';
+import Todos from "./Todos";
 
 const List = () => {
   return (
@@ -20,6 +21,7 @@ const List = () => {
           Default checkbox
         </label>
       </div> */}
+      <Todos></Todos>
     </div>
   );
 };
