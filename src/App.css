@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.card1{
+  height: 100%;
+  width: 40%; 
+  /* background-color: #ea9ab2; */
+}
