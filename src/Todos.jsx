@@ -1,6 +1,17 @@
 import React from 'react';
 
-const Todos = ({ list }) => {
+const Todos = ({ list,  handleDelete }) => {
+    // function handleEdit(todo) {
+    //    console.log("yo "+todo.id);
+    // //    list = list.
+    // }
+
+    // function handleDelete(todo) {
+    //     const newTodos = [...list];
+    //     newTodos.splice(0, );
+    //     console.log(newTodos);
+    //  }
+    
     return (
         <div>
             {
@@ -10,7 +21,7 @@ const Todos = ({ list }) => {
                             <tr>
                                 <td>{todo.name}</td>
                                 <td><i className="bi bi-pencil"></i></td>
-                                <td><i className="bi bi-trash"></i></td>
+                                <td><i className="bi bi-trash"onClick={() => handleDelete(todo.id)}></i></td>
                             </tr>
                         </tbody>
                     </table>

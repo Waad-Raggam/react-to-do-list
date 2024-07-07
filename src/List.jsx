@@ -14,7 +14,7 @@ const List = () => {
             name: "Task 3"
         }
     ];
-    
+
     const [list, setList] = React.useState(TodoItem);
     const [name, setName] = React.useState('');
 
@@ -27,6 +27,11 @@ const List = () => {
         setList(newList);
         setName('');
     }
+
+    const handleDelete = (id) => {
+      const newList = list.filter(todo => todo.id !== id);
+      setList(newList);
+  };
 
     return (
         <div className="card1 card text-white bg-dark mb-3 border-dark">
@@ -43,7 +48,7 @@ const List = () => {
                 />
                 <button type="submit" className="btn btn-primary" onClick={handleAdd}>Add task</button>
             </div>
-            <Todos list={list} />
+            <Todos list={list} handleDelete={handleDelete} />
         </div>
     );
 };
