@@ -2,28 +2,50 @@ import React from 'react';
 import Todos from "./Todos";
 
 const List = () => {
-  return (
-    <div className="card1 card text-white bg-dark mb-3 border-dark">
-      <div class="card-header">
-        To Do List
-      </div>
-      <div className="card-body">
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add item"></input>
-        {/* <h5 className="card-title">Card title</h5>
-        <p className="card-text">
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </p> */}
-        <button type="submit" class="btn btn-primary">Add task</button>
-      </div>
-      {/* <div>
-      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"></input>
-        <label class="form-check-label" for="defaultCheck1">
-          Default checkbox
-        </label>
-      </div> */}
-      <Todos></Todos>
-    </div>
-  );
+    const TodoItem = [
+        {
+            id: 1,
+            name: "Task 1"
+        }, {
+            id: 2,
+            name: "Task 2"
+        }, {
+            id: 3,
+            name: "Task 3"
+        }
+    ];
+    
+    const [list, setList] = React.useState(TodoItem);
+    const [name, setName] = React.useState('');
+
+    function handleChange(event) {
+        setName(event.target.value);
+    }
+
+    function handleAdd() {
+        const newList = list.concat({ id: list.length + 1, name });
+        setList(newList);
+        setName('');
+    }
+
+    return (
+        <div className="card1 card text-white bg-dark mb-3 border-dark">
+            <div className="card-header">
+                To Do List
+            </div>
+            <div className="card-body">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Add item"
+                    value={name}
+                    onChange={handleChange}
+                />
+                <button type="submit" className="btn btn-primary" onClick={handleAdd}>Add task</button>
+            </div>
+            <Todos list={list} />
+        </div>
+    );
 };
 
 export default List;
