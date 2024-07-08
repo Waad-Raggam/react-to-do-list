@@ -1,16 +1,12 @@
 import React from 'react';
 
-const Todos = ({ list,  handleDelete }) => {
-    // function handleEdit(todo) {
-    //    console.log("yo "+todo.id);
-    // //    list = list.
-    // }
-
-    // function handleDelete(todo) {
-    //     const newTodos = [...list];
-    //     newTodos.splice(0, );
-    //     console.log(newTodos);
-    //  }
+const Todos = ({  list,
+    handleDelete,
+    handleEditClick,
+    handleEditChange,
+    handleEditSave,
+    editTodo,
+    editName}) => {
     
     return (
         <div>
@@ -19,8 +15,21 @@ const Todos = ({ list,  handleDelete }) => {
                     <table className="table table-dark" key={todo.id}>
                         <tbody>
                             <tr>
-                                <td>{todo.name}</td>
-                                <td><i className="bi bi-pencil"></i></td>
+                            {editTodo && editTodo.id === todo.id ? (
+                                        <input
+                                            type="text"
+                                            value={editName}
+                                            onChange={handleEditChange}
+                                            className="form-control"
+                                        />
+                                    ) : (
+                                        todo.name
+                                    )}
+                                <td> {editTodo && editTodo.id === todo.id ? (
+                                        <button onClick={() => handleEditSave(todo.id)} className="btn btn-success">Save</button>
+                                    ) : (
+                                        <i className="bi bi-pencil" onClick={() => handleEditClick(todo)}></i>
+                                    )}</td>
                                 <td><i className="bi bi-trash"onClick={() => handleDelete(todo.id)}></i></td>
                             </tr>
                         </tbody>

@@ -17,6 +17,8 @@ const List = () => {
 
     const [list, setList] = React.useState(TodoItem);
     const [name, setName] = React.useState('');
+    const [editTodo, setEditTodo] = React.useState(null);
+    const [editName, setEditName] = React.useState('');
 
     function handleChange(event) {
         setName(event.target.value);
@@ -33,6 +35,22 @@ const List = () => {
       setList(newList);
   };
 
+  const handleEditClick = (todo) => {
+    setEditTodo(todo);
+    setEditName(todo.name);
+};
+
+const handleEditChange = (event) => {
+    setEditName(event.target.value);
+};
+
+const handleEditSave = (id) => {
+    const newList = list.map(todo => todo.id === id ? { ...todo, name: editName } : todo);
+    setList(newList);
+    setEditTodo(null);
+    setEditName('');
+};
+
     return (
         <div className="card1 card text-white bg-dark mb-3 border-dark">
             <div className="card-header">
@@ -48,7 +66,15 @@ const List = () => {
                 />
                 <button type="submit" className="btn btn-primary" onClick={handleAdd}>Add task</button>
             </div>
-            <Todos list={list} handleDelete={handleDelete} />
+            <Todos
+                list={list}
+                handleDelete={handleDelete}
+                handleEditClick={handleEditClick}
+                handleEditChange={handleEditChange}
+                handleEditSave={handleEditSave}
+                editTodo={editTodo}
+                editName={editName}
+            />
         </div>
     );
 };
